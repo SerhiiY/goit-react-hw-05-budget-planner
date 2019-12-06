@@ -26,6 +26,7 @@ const ExpenseForm = ({ onSave }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSave(expense);
+    e.target.reset();
   }
     
   return (

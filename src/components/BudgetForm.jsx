@@ -22,6 +22,7 @@ const BudgetForm = ({ onSave }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSave(inputValue);
+    e.target.reset();
   }
 
   return (
