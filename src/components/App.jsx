@@ -5,6 +5,8 @@ import ExpenseForm from "./ExpenseForm";
 import ExpensesTable from "./ExpensesTable";
 import Values from "./Values";
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'; //redux
 
@@ -30,6 +32,10 @@ const App = ({ expenses }) => (
     {expenses.length > 0 && (
       <ExpensesTable />
     )}
+    <ToastContainer
+      position="bottom-right"
+      autoClose={3000}
+    />
   </Container>
 );
 

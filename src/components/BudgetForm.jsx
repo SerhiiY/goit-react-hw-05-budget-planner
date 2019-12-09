@@ -4,6 +4,7 @@ import Label from './shared/Label';
 import Input from './shared/Input';
 import Button from './shared/Button';
 
+import { toast } from 'react-toastify';
 import { connect } from 'react-redux';  //redux
 import * as actions from './redux/actions';  //redux
 
@@ -21,6 +22,7 @@ const BudgetForm = ({ onSave }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if(inputValue <= 0) return toast.error("Enter correct number!");
     onSave(inputValue);
     e.target.reset();
   }

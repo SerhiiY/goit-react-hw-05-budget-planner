@@ -4,6 +4,7 @@ export const Type = {
   ADD_EXPENSE: 'ADD_EXPENSE',
   REMOVE_EXPENSE: 'REMOVE_EXPENSE',
   SET_BUDGET: 'SET_BUDGET',
+  SET_BALANCE: 'SET_BALANCE',
 };
 
 export const setBudget = budget => ({
@@ -27,3 +28,8 @@ export const removeExpense = id => ({
   type: Type.REMOVE_EXPENSE,
   payload: id,
 });
+
+export const setBalance = value => ({
+  type: Type.SET_BALANCE,
+  payload: value,
+})

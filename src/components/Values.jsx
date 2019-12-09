@@ -4,6 +4,7 @@ import Value from './Value';
 
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';  //redux
+import * as actions from './redux/actions';  //redux
 
 const Container = styled.section`
   display: inline-flex;
@@ -15,9 +16,10 @@ const calculateTotalExpenses = expenses =>
   expenses.reduce((total, expense) => total + expense.amount, 0);
 
 
-const Values = ({ budget, expenses }) => {
+const Values = ({ budget, expenses, setBalance }) => {
   const totalExpenses = calculateTotalExpenses(expenses);
   const balance = budget - totalExpenses;
+  setBalance(balance);
 
 return (
     <Container>
@@ -31,7 +33,10 @@ return (
 const mapStateToProps = state => ({
   budget: state.budget,
   expenses: state.expenses,
-  balance: state.balance
+})
+
+const mapDispatchToProps = dispatch => ({
+  setBalance: value => dispatch(actions.setBalance(value)),
 })
 
 Values.propTypes = {
@@ -43,4 +48,4 @@ Values.defaultProps = {
   budget: 0,
   expences: [],
 }
-  export default connect(mapStateToProps)(Values);
+  export default connect(mapStateToProps, mapDispatchToProps)(Values);

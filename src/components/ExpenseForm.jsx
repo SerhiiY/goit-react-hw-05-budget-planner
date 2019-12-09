@@ -4,6 +4,7 @@ import Label from './shared/Label';
 import Input from './shared/Input';
 import Button from './shared/Button';
 
+import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';  //redux
 import * as actions from './redux/actions';  //redux
@@ -12,7 +13,7 @@ const labelStyles = `
   margin-bottom: 16px;  
 `;
 
-const ExpenseForm = ({ onSave }) => {
+const ExpenseForm = ({ onSave, balance }) => {
 
   const expense = {
     name: '',
@@ -25,6 +26,10 @@ const ExpenseForm = ({ onSave }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const { name, amount } = expense;
+    if (amount <= 0) return toast.error("Enter correct number!");
+    if (!name) return toast.error("Enter correct expense name!");
+    if (balance < amount) return toast.error("You don't have anough money");
     onSave(expense);
     e.target.reset();
   }
@@ -55,7 +60,9 @@ const ExpenseForm = ({ onSave }) => {
   );
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  balance: state.balance,
+});
 
 const mapDispatchToProps = dispatch => ({
   onSave: expense => dispatch(actions.addExpense(expense)),  
